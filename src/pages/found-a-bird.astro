@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import { getEntry } from 'astro:content';
+
+const page = await getEntry('pages', 'found-a-bird');
+const { heading, intro, steps = [], phone, phoneLink, legalNote } = page.data;
+---
+<Base title={page.data.title} description={page.data.description}>
+  <section class="page-header">
+    <div class="wrap">
+      <h1>{heading}</h1>
+      <p>{intro}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap content">
+      <ol class="step-list">
+        {steps.map((step) => (
+          <li>
+            <div>
+              <h3>{step.heading}</h3>
+              <p>{step.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      {phone && (
+        <p>Call or text <a href={phoneLink}>{phone}</a> — placeholder number.</p>
+      )}
+      {legalNote && (
+        <p><em>{legalNote}</em></p>
+      )}
+    </div>
+  </section>
+</Base>

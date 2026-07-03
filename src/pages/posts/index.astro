@@ -1,0 +1,38 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+---
+<Base title="Updates">
+  <section class="page-header">
+    <div class="wrap">
+      <h1>Updates from the flight cage</h1>
+      <p>Intakes, recoveries, and release days — the everyday work of getting wild birds back to the sky.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <ul class="post-list">
+        {posts.map((post) => (
+          <li>
+            <a class="post-card" href={`/posts/${post.id}`}>
+              <time datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>
+              <span>
+                <span class="title">{post.data.title}</span>
+                {post.data.excerpt && <span class="excerpt">{post.data.excerpt}</span>}
+              </span>
+              <span class={`chip ${post.data.status === 'Released' ? 'released' : ''}`}>
+                {post.data.status}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,66 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Wildlife rehabilitation for wild birds — rescue stories, updates, and how to help.' } = Astro.props;
+const path = Astro.url.pathname;
+const isCurrent = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · Second Flight Bird Rehab</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito+Sans:ital,wght@0,400;0,700;0,800;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/">
+          <!-- simple wing mark, drawn in the accent color -->
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <path d="M3 20 C8 8, 20 4, 26 5 C22 12, 16 17, 8 19 L3 20 Z" fill="#E0A32E"/>
+            <path d="M3 20 C9 16, 15 14, 21 13" stroke="#1E332A" stroke-width="1.4" fill="none"/>
+          </svg>
+          Second Flight
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          <a href="/" aria-current={isCurrent('/') ? 'page' : undefined}>Home</a>
+          <a href="/posts" aria-current={isCurrent('/posts') ? 'page' : undefined}>Updates</a>
+          <a href="/found-a-bird" aria-current={isCurrent('/found-a-bird') ? 'page' : undefined}>Found a bird?</a>
+          <a href="/about" aria-current={isCurrent('/about') ? 'page' : undefined}>About</a>
+          <a class="btn btn-gold" href="/donate" style="padding: 0.5rem 1.3rem;">Donate</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div>
+          <strong>Second Flight Bird Rehab</strong>
+          Licensed wildlife rehabilitator · Bloomington, Minnesota<br />
+          <small>Placeholder name & details — swap in her real info.</small>
+        </div>
+        <div>
+          <strong>Help the birds</strong>
+          <a href="/donate">Donate</a> · <a href="/found-a-bird">Found an injured bird?</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

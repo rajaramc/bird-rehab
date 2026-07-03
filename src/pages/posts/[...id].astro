@@ -1,0 +1,39 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+---
+<Base title={post.data.title} description={post.data.excerpt}>
+  <article>
+    <header class="article-header">
+      <div class="wrap">
+        <div class="meta">
+          <time datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>
+          {post.data.species && <span>· {post.data.species}</span>}
+          <span class={`chip ${post.data.status === 'Released' ? 'released' : ''}`}>
+            {post.data.status}
+          </span>
+        </div>
+        <h1>{post.data.title}</h1>
+      </div>
+    </header>
+    <div class="prose">
+      <div class="wrap content">
+        {post.data.image && <img src={post.data.image} alt="" />}
+        <Content />
+      </div>
+    </div>
+  </article>
+</Base>

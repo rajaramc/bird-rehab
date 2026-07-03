@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import { getEntry } from 'astro:content';
+
+const page = await getEntry('pages', 'donate');
+const { heading, intro, venmoHandle, venmoUrl, qrImage, wishlistUrl, tiers = [] } = page.data;
+---
+<Base title={page.data.title} description={page.data.description}>
+  <section class="page-header">
+    <div class="wrap">
+      <h1>{heading}</h1>
+      <p>{intro}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="donate-methods">
+        <div class="method">
+          <h3>Venmo</h3>
+          <p>The fastest way to help. Scan the code or tap the button.</p>
+          {qrImage && <p><img src={qrImage} alt="Venmo QR code" /></p>}
+          <a class="btn btn-gold" href={venmoUrl}>{venmoHandle}</a>
+        </div>
+        <div class="method">
+          <h3>Supplies wishlist</h3>
+          <p>Prefer to send exactly what the birds need? Shop the current wishlist — items ship directly here.</p>
+          <a class="btn btn-outline" href={wishlistUrl}>View wishlist</a>
+        </div>
+        <div class="method">
+          <h3>What your gift covers</h3>
+          <p>
+            {tiers.map((t, i) => (
+              <Fragment>
+                <strong>{t.amount}</strong> — {t.covers}{i < tiers.length - 1 && <br />}
+              </Fragment>
+            ))}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,84 @@
+# Decap CMS configuration
+# LOCAL DEMO MODE: run `npm run cms` in a second terminal, then open
+# http://localhost:4321/admin — no login needed, edits write to your local files.
+local_backend: true
+
+# WHEN GOING LIVE: delete `local_backend`, uncomment below, and set your repo.
+# backend:
+#   name: github
+#   repo: your-github-username/bird-rehab-site
+#   branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "posts"
+    label: "Updates"
+    folder: "src/content/posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Species", name: "species", widget: "string", required: false, hint: "e.g. Great Horned Owl" }
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        options: ["In care", "Released", "Education bird", "Update"]
+        default: "Update"
+      - { label: "Short summary", name: "excerpt", widget: "text", required: false, hint: "One or two sentences shown in the update list" }
+      - { label: "Photo", name: "image", widget: "image", required: false }
+      - { label: "Story", name: "body", widget: "markdown" }
+
+  - name: "pages"
+    label: "Site pages"
+    # Each page is a single file with guided fields — the layout lives in code,
+    # so editing here can't break the design. No new files can be created.
+    files:
+      - label: "Donate page"
+        name: "donate"
+        file: "src/content/pages/donate.md"
+        fields:
+          - { label: "Browser tab title", name: "title", widget: "string" }
+          - { label: "SEO description", name: "description", widget: "text", required: false }
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Intro paragraph", name: "intro", widget: "text" }
+          - { label: "Venmo handle (button text)", name: "venmoHandle", widget: "string" }
+          - { label: "Venmo link", name: "venmoUrl", widget: "string" }
+          - { label: "Venmo QR image", name: "qrImage", widget: "image", required: false }
+          - { label: "Wishlist link", name: "wishlistUrl", widget: "string", required: false }
+          - label: "Impact tiers"
+            name: "tiers"
+            widget: "list"
+            label_singular: "tier"
+            fields:
+              - { label: "Amount", name: "amount", widget: "string", hint: "e.g. $10" }
+              - { label: "What it covers", name: "covers", widget: "string" }
+      - label: "Found a bird page"
+        name: "found-a-bird"
+        file: "src/content/pages/found-a-bird.md"
+        fields:
+          - { label: "Browser tab title", name: "title", widget: "string" }
+          - { label: "SEO description", name: "description", widget: "text", required: false }
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Intro paragraph", name: "intro", widget: "text" }
+          - label: "Steps"
+            name: "steps"
+            widget: "list"
+            label_singular: "step"
+            fields:
+              - { label: "Step heading", name: "heading", widget: "string" }
+              - { label: "Step text", name: "text", widget: "text" }
+          - { label: "Phone (shown on page)", name: "phone", widget: "string" }
+          - { label: "Phone link", name: "phoneLink", widget: "string", hint: "e.g. tel:+16125550123" }
+          - { label: "Legal note", name: "legalNote", widget: "text", required: false }
+      - label: "About page"
+        name: "about"
+        file: "src/content/pages/about.md"
+        fields:
+          - { label: "Browser tab title", name: "title", widget: "string" }
+          - { label: "SEO description", name: "description", widget: "text", required: false }
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Intro paragraph", name: "intro", widget: "text" }
+          - { label: "Body", name: "body", widget: "markdown" }

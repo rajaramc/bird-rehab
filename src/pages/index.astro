@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 4);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+---
+<Base title="Home">
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Wild bird rescue &amp; rehabilitation · Minnesota</p>
+      <h1>Every bird deserves a <em>second flight.</em></h1>
+      <p class="lede">
+        Injured and orphaned wild birds arrive here scared, hurt, and out of
+        options. They leave the way they were meant to — on their own wings.
+      </p>
+      <div class="actions">
+        <a class="btn btn-gold" href="/donate">Fuel a recovery</a>
+        <a class="btn btn-outline" href="/found-a-bird">I found an injured bird</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>From the flight cage</h2>
+        <a href="/posts">All updates →</a>
+      </div>
+      <ul class="post-list">
+        {posts.map((post) => (
+          <li>
+            <a class="post-card" href={`/posts/${post.id}`}>
+              <time datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>
+              <span>
+                <span class="title">{post.data.title}</span>
+                {post.data.excerpt && <span class="excerpt">{post.data.excerpt}</span>}
+              </span>
+              <span class={`chip ${post.data.status === 'Released' ? 'released' : ''}`}>
+                {post.data.status}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="donate-panel">
+        <h2>A syringe of formula costs pennies. A wing repair costs real money.</h2>
+        <p>
+          This work runs entirely on donations — no salaries, no overhead, just
+          food, medicine, and enclosures. Every dollar goes to a bird.
+        </p>
+        <div class="actions">
+          <a class="btn btn-gold" href="/donate">Donate via Venmo</a>
+          <a class="btn btn-outline" href="/donate">Other ways to help</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
