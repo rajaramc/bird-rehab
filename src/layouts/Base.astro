@@ -37,9 +37,10 @@ const isCurrent = (href: string) =>
         </a>
         <nav class="site-nav" aria-label="Main">
           <a href="/" aria-current={isCurrent('/') ? 'page' : undefined}>Home</a>
-          <a href="/posts" aria-current={isCurrent('/posts') ? 'page' : undefined}>Updates</a>
-          <a href="/found-a-bird" aria-current={isCurrent('/found-a-bird') ? 'page' : undefined}>Found a bird?</a>
+          <a href="/posts" aria-current={isCurrent('/posts') ? 'page' : undefined}>Field notes</a>
+          <a href="/resources" aria-current={isCurrent('/resources') ? 'page' : undefined}>Resources</a>
           <a href="/about" aria-current={isCurrent('/about') ? 'page' : undefined}>About</a>
+          <a class="btn btn-outline" href="/found-a-bird" style="padding: 0.5rem 1.3rem;" aria-current={isCurrent('/found-a-bird') ? 'page' : undefined}>Found a bird?</a>
           <a class="btn btn-gold" href="/donate" style="padding: 0.5rem 1.3rem;">Donate</a>
         </nav>
       </div>

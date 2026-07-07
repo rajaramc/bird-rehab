@@ -1,0 +1,158 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Grouped resource links. All URLs verified before authoring, but re-check
+// each one before launch (agencies reorganize their sites).
+const groups = [
+  {
+    heading: 'Found an injured or orphaned bird?',
+    intro:
+      'Start here. Call ahead before moving any bird — the right first step depends on the species and situation.',
+    items: [
+      {
+        name: 'Minnesota DNR — Sick, Injured & Orphaned Wildlife',
+        href: 'https://www.dnr.state.mn.us/eco/nongame/rehabilitation/injured-orphaned-wildlife.html',
+        desc: 'Official state guidance on when a wild animal truly needs help and what to do.',
+      },
+      {
+        name: 'Minnesota DNR — Find a Permitted Rehabilitator',
+        href: 'https://www.dnr.state.mn.us/eco/nongame/rehabilitation/organizations.html',
+        desc: 'The state’s list of licensed wildlife rehabilitators, searchable by county.',
+      },
+      {
+        name: 'Wildlife Rehabilitation Center of Minnesota — Roseville',
+        href: 'https://www.wrcmn.org',
+        desc: 'One of the busiest wildlife hospitals in the country; accepts most species. (651) 486-9453.',
+      },
+      {
+        name: 'The Raptor Center (U of M) — St. Paul',
+        href: 'https://raptor.umn.edu',
+        desc: 'For hawks, owls, eagles, and falcons specifically. (612) 624-4745.',
+      },
+    ],
+  },
+  {
+    heading: 'For rehabilitators',
+    intro: 'Licensing, training, and the wider professional community.',
+    items: [
+      {
+        name: 'Minnesota DNR — Wildlife Rehabilitation Permits',
+        href: 'https://www.dnr.state.mn.us/eco/nongame/rehabilitation/permits.html',
+        desc: 'How to obtain, renew, and upgrade a Minnesota rehabilitation permit.',
+      },
+      {
+        name: 'National Wildlife Rehabilitators Association (NWRA)',
+        href: 'https://www.nwrawildlife.org',
+        desc: 'Standards, continuing education, publications, and the annual symposium.',
+      },
+    ],
+  },
+  {
+    heading: 'Learn about birds',
+    intro: 'Identification and background for curious visitors.',
+    items: [
+      {
+        name: 'Cornell Lab — All About Birds',
+        href: 'https://www.allaboutbirds.org',
+        desc: 'Free species guide with photos, sounds, and behavior for North American birds.',
+      },
+    ],
+  },
+];
+---
+<Base title="Resources" description="Trusted Minnesota and national wildlife rehabilitation resources — who to call, how to help, and where to learn.">
+  <section class="page-header">
+    <div class="wrap">
+      <h1>Resources</h1>
+      <p>
+        We're one small operation in a much larger network. If we can't help
+        with your bird, one of these can — and every link here is a group we
+        trust.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap content">
+      {groups.map((group) => (
+        <div class="resource-group">
+          <h2>{group.heading}</h2>
+          <p class="group-intro">{group.intro}</p>
+          <ul class="resource-list">
+            {group.items.map((item) => (
+              <li>
+                <a href={item.href} target="_blank" rel="noopener noreferrer">
+                  <span class="resource-name">{item.name}<span class="ext" aria-hidden="true">&#8599;</span></span>
+                  <span class="resource-desc">{item.desc}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+
+      <p class="fine-print">
+        Migratory birds are protected under federal law, and caring for one
+        without the proper state and federal permits is illegal — even with
+        good intentions. When in doubt, call a licensed rehabilitator first.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .resource-group { margin-block: 2.5rem; }
+  .resource-group:first-of-type { margin-top: 1rem; }
+  .resource-group h2 { margin-bottom: 0.4rem; }
+  .group-intro {
+    color: var(--spruce-70);
+    margin-bottom: 1.25rem;
+    max-width: 52ch;
+  }
+  .resource-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1px;
+    background: var(--spruce-12);
+    border-block: 1px solid var(--spruce-12);
+  }
+  .resource-list li { background: var(--paper); }
+  .resource-list a {
+    display: block;
+    padding: 1.15rem 0.25rem;
+    text-decoration: none;
+    transition: background 120ms ease;
+  }
+  .resource-list a:hover { background: var(--spruce-05); }
+  .resource-name {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--spruce);
+  }
+  .resource-list a:hover .resource-name { color: var(--gold); }
+  .ext {
+    font-family: var(--font-body);
+    font-size: 0.8em;
+    margin-left: 0.35rem;
+    color: var(--gold);
+  }
+  .resource-desc {
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--spruce-70);
+    font-size: 0.98rem;
+  }
+  .fine-print {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--spruce-12);
+    color: var(--spruce-70);
+    font-size: 0.92rem;
+    font-style: italic;
+    max-width: 60ch;
+  }
+</style>
