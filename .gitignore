@@ -31,3 +31,5 @@ pnpm-debug.log*
 Thumbs.db
 *.swp
 .idea/
+# local secrets for wrangler pages dev - NEVER commit
+.dev.vars
