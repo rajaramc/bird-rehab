@@ -1,5 +1,10 @@
 import { defineConfig } from 'astro/config';
 
+import cloudflare from '@astrojs/cloudflare';
+
 export default defineConfig({
-  site: 'https://example.pages.dev', // update when deployed
+  // update when deployed
+  site: 'https://example.pages.dev',
+
+  adapter: cloudflare()
 });

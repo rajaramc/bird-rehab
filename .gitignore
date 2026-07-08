@@ -33,3 +33,6 @@ Thumbs.db
 .idea/
 # local secrets for wrangler pages dev - NEVER commit
 .dev.vars
+
+.dev.vars*
+!.dev.vars.example
