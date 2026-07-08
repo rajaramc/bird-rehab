@@ -10,6 +10,15 @@ const posts = defineCollection({
     status: z.enum(['In care', 'Released', 'Education bird', 'Update']).default('Update'),
     excerpt: z.string().optional(),
     image: z.string().optional(),
+    caption: z.string().optional(),
+    gallery: z
+      .array(
+        z.object({
+          src: z.string(),
+          caption: z.string().optional(),
+        })
+      )
+      .optional(),
   }),
 });
 

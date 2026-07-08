@@ -123,14 +123,32 @@ Search the repo for `placeholder`, `REPLACE`, and `TODO`:
 4. Live at `<project>.pages.dev`; add a custom domain later (~$10/yr).
 5. Auto-redeploys on every push.
 
-## Known gotcha — CMS auth in production
+## CMS auth in production (IMPLEMENTED)
 
-`public/admin/config.yml` currently uses `local_backend: true` (works only
-with `npm run cms` locally). For her to edit the live site, switch to the
-GitHub backend AND set up OAuth — a static host can't do the GitHub OAuth
-handshake alone. Options: a small Cloudflare Worker as the OAuth client, or
-a hosted Decap OAuth provider. See Decap docs "External OAuth clients."
-Don't tell her `/admin` works remotely until this is wired up.
+`public/admin/config.yml` uses the GitHub backend with
+`auth_endpoint: /api/auth`. The OAuth broker is `functions/api/auth.js` +
+`functions/api/callback.js` (Cloudflare Pages Functions, deployed with the
+site — no separate Worker). `callback.js` also enforces an allowlist via the
+`ALLOWED_GITHUB_USERS` env var.
+
+Required Cloudflare Pages env vars: `GITHUB_CLIENT_ID`,
+`GITHUB_CLIENT_SECRET` (encrypted), `ALLOWED_GITHUB_USERS`.
+See DEPLOY.md for the full setup + security model.
+
+`local_backend: true` stays in config.yml — it's ignored on the live site and
+keeps Raja's local `npm run cms` workflow working.
+
+Security boundary: every write is a GitHub commit, so GitHub's repo
+permissions are the real gate. The allowlist is defense-in-depth. 2FA on both
+GitHub accounts matters more than anything in this repo.
+
+## Images in posts
+
+Posts support: a `caption`ed main `image` (caption doubles as alt text),
+inline images via the Decap markdown toolbar, and an optional `gallery` array
+(`{src, caption}`) rendered as a lazy-loaded responsive grid. Images commit to
+`public/images/` through the same GitHub -> Cloudflare pipeline as text.
+Schema lives in `src/content.config.ts`; rendering in `src/pages/posts/[...id].astro`.
 
 ## Dependency note — Astro 5 vs 7
 

@@ -31,9 +31,53 @@ const fmt = (d: Date) =>
     </header>
     <div class="prose">
       <div class="wrap content">
-        {post.data.image && <img src={post.data.image} alt="" />}
+        {post.data.image && (
+          <figure class="featured">
+            <img src={post.data.image} alt={post.data.caption ?? ''} />
+            {post.data.caption && <figcaption>{post.data.caption}</figcaption>}
+          </figure>
+        )}
         <Content />
+        {post.data.gallery && post.data.gallery.length > 0 && (
+          <section class="gallery" aria-label="Photo gallery">
+            {post.data.gallery.map((photo) => (
+              <figure>
+                <img src={photo.src} alt={photo.caption ?? ''} loading="lazy" decoding="async" />
+                {photo.caption && <figcaption>{photo.caption}</figcaption>}
+              </figure>
+            ))}
+          </section>
+        )}
       </div>
     </div>
   </article>
 </Base>
+
+<style>
+  figure.featured { margin: 0 0 1.75rem; }
+  figure.featured img {
+    width: 100%;
+    border-radius: 12px;
+    display: block;
+  }
+  figure figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--spruce-70);
+    font-style: italic;
+  }
+  .gallery {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .gallery figure { margin: 0; }
+  .gallery img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+  }
+</style>

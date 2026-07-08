@@ -1,6 +1,15 @@
 # Decap CMS configuration
 # LOCAL DEMO MODE: run `npm run cms` in a second terminal, then open
 # http://localhost:4321/admin — no login needed, edits write to your local files.
+
+backend:
+  name: github
+  repo: rajaramc/bird-rehab
+  branch: main
+  base_url: https://bird-rehab.pages.dev
+  auth_endpoint: /api/auth
+
+
 local_backend: true
 
 # WHEN GOING LIVE: delete `local_backend`, uncomment below, and set your repo.
@@ -28,8 +37,19 @@ collections:
         options: ["In care", "Released", "Education bird", "Update"]
         default: "Update"
       - { label: "Short summary", name: "excerpt", widget: "text", required: false, hint: "One or two sentences shown in the update list" }
-      - { label: "Photo", name: "image", widget: "image", required: false }
+      - { label: "Main photo", name: "image", widget: "image", required: false, hint: "The headline photo shown at the top of the post" }
+      - { label: "Photo caption", name: "caption", widget: "string", required: false, hint: "Describes the main photo (also read aloud by screen readers)" }
       - { label: "Story", name: "body", widget: "markdown" }
+      - label: "Photo gallery"
+        name: "gallery"
+        widget: "list"
+        required: false
+        label_singular: "Photo"
+        summary: "{{fields.caption}}"
+        hint: "Optional — add several photos to show below the story"
+        fields:
+          - { label: "Image", name: "src", widget: "image" }
+          - { label: "Caption", name: "caption", widget: "string", required: false }
 
   - name: "pages"
     label: "Site pages"
