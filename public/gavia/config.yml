@@ -1,6 +1,6 @@
 # Decap CMS configuration
 # LOCAL DEMO MODE: run `npm run cms` in a second terminal, then open
-# http://localhost:4321/admin — no login needed, edits write to your local files.
+# http://localhost:4321/gavia — no login needed, edits write to your local files.
 
 backend:
   name: github
