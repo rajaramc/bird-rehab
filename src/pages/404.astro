@@ -1,0 +1,139 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Page not found" description="This page dove and didn't resurface.">
+  <section class="notfound">
+    <div class="wrap">
+      <!-- Common Loon (Minnesota state bird), hand-drawn.
+           Three colors only: spruce body, paper checkers, gold eye. -->
+      <svg
+        class="loon"
+        viewBox="0 0 280 200"
+        xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        aria-label="Illustration of a common loon floating alone on still water"
+      >
+        <!-- unified body + neck silhouette -->
+        <path
+          d="M50 136
+             C53 114, 88 104, 132 105
+             C157 106, 171 111, 177 121
+             C173 102, 177 87, 187 79
+             L203 91
+             C199 105, 195 118, 194 130
+             C193 138, 191 142, 187 143
+             C140 148, 86 147, 50 136 Z"
+          fill="var(--spruce)"
+        />
+
+        <!-- head, dagger bill, and the one gold moment: the eye -->
+        <circle cx="197" cy="80" r="15.5" fill="var(--spruce)" />
+        <path d="M209 77 L236 82 L209 87 Z" fill="var(--spruce)" />
+        <circle cx="203" cy="76" r="3.2" fill="var(--gold)" />
+
+        <!-- checkered back -->
+        <g fill="var(--paper)">
+          <rect x="72" y="116" width="5.5" height="5.5" />
+          <rect x="84" y="112" width="5.5" height="5.5" />
+          <rect x="96" y="110" width="5.5" height="5.5" />
+          <rect x="108" y="109" width="5.5" height="5.5" />
+          <rect x="120" y="110" width="5.5" height="5.5" />
+          <rect x="132" y="112" width="5.5" height="5.5" />
+          <rect x="78" y="126" width="5.5" height="5.5" />
+          <rect x="90" y="122" width="5.5" height="5.5" />
+          <rect x="102" y="120" width="5.5" height="5.5" />
+          <rect x="114" y="119" width="5.5" height="5.5" />
+          <rect x="126" y="121" width="5.5" height="5.5" />
+          <rect x="138" y="124" width="5.5" height="5.5" />
+        </g>
+
+        <!-- necklace stripes -->
+        <g stroke="var(--paper)" stroke-width="1.5" opacity="0.85" fill="none">
+          <path d="M180 118 L192 121" />
+          <path d="M181 109 L194 112" />
+          <path d="M184 100 L196 103" />
+        </g>
+
+        <!-- waterline and ripples -->
+        <g stroke="var(--spruce)" fill="none" stroke-linecap="round">
+          <path d="M18 145 C60 141, 220 141, 262 145" stroke-width="2" opacity="0.5" />
+          <path d="M38 157 C68 153, 108 155, 136 153" stroke-width="1.6" opacity="0.28" />
+          <path d="M162 159 C188 155, 218 157, 242 154" stroke-width="1.6" opacity="0.28" />
+          <path d="M62 169 C84 166, 106 168, 124 166" stroke-width="1.4" opacity="0.16" />
+        </g>
+
+      </svg>
+
+      <p class="code">404</p>
+      <h1>This page dove and didn't resurface.</h1>
+      <p class="lede">
+        A loon can stay under for a full minute and pop up a hundred yards
+        away. The page you're after did something similar — it may have moved,
+        or it never existed at all.
+      </p>
+
+      <div class="actions">
+        <a class="btn btn-gold" href="/">Back to the surface</a>
+        <a class="btn btn-outline" href="/posts">Read the field notes</a>
+      </div>
+
+      <p class="urgent">
+        Found an injured bird and landed here by mistake?
+        <a href="/found-a-bird">Here's what to do right now →</a>
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .notfound {
+    padding-block: clamp(3rem, 8vw, 6rem) clamp(4rem, 10vw, 7rem);
+    text-align: center;
+  }
+  .loon {
+    width: min(280px, 74vw);
+    height: auto;
+    display: block;
+    margin: 0 auto 2rem;
+  }
+  .code {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--spruce-40);
+    margin-bottom: 0.75rem;
+  }
+  .notfound h1 {
+    font-size: clamp(2rem, 5vw, 3.3rem);
+    max-width: 18ch;
+    margin-inline: auto;
+  }
+  .lede {
+    margin: 1.25rem auto 0;
+    max-width: 46ch;
+    font-size: 1.15rem;
+    color: var(--spruce-70);
+  }
+  .actions {
+    margin-top: 2.25rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .urgent {
+    margin-top: 3rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--spruce-12);
+    max-width: 46ch;
+    margin-inline: auto;
+    font-size: 0.95rem;
+    color: var(--spruce-70);
+  }
+  .urgent a {
+    color: var(--gold);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+</style>
