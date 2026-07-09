@@ -6,7 +6,7 @@ backend:
   name: github
   repo: rajaramc/bird-rehab
   branch: main
-  base_url: https://bird-rehab.pages.dev
+  base_url: https://secondflight.org
   auth_endpoint: /api/auth
 
 
