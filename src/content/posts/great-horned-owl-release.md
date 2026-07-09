@@ -1,9 +1,10 @@
 ---
-title: "Great Horned Owl Flies Free After Six Weeks"
+title: What do hummingbirds eat?
 date: 2026-06-28
-species: "Great Horned Owl"
-status: "Released"
-excerpt: "He arrived unable to lift his left wing. Last night he lifted off into the treeline like we were never here."
+species: Great Horned Owl
+status: Released
+excerpt: He arrived unable to lift his left wing. Last night he lifted off into
+  the treeline like we were never here.
 ---
 
 He came in the first week of May — a driver spotted him in the ditch off
