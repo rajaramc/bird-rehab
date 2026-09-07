@@ -3,11 +3,11 @@ title: Donate
 description: Support wild bird rehabilitation — every dollar goes directly to
   food, medicine, and care.
 heading: Your gift goes straight to a bird.
-intro: No salaries. No office. No overhead. Donations buy mealworms, formula,
-  medications, splint supplies, and enclosure repairs — nothing else.
+intro: Donations buy mealworms, formula, medications, supplies, and enclosure
+  repairs — nothing else.
 venmoHandle: "@Jessika-Madisson-Kennedy"
 venmoUrl: https://venmo.com/u/jessika-madison-kennedy
-qrImage: /images/venmo-qr-placeholder.svg
+qrImage: /images/img_1719.jpeg
 wishlistUrl: "#"
 tiers:
   - amount: $10
