@@ -212,10 +212,12 @@ button:focus-visible {
   line-height: 1.25;
 }
 .post-card .excerpt {
-  margin-top: 0.35rem;
   color: var(--spruce-70);
   font-size: 0.98rem;
+  display: block;
+  margin-top: 0.35rem;
 }
+
 @media (max-width: 640px) {
   .post-card { grid-template-columns: 1fr; gap: 0.4rem; }
 }
@@ -239,7 +241,7 @@ button:focus-visible {
 }
 
 /* ---------- Article page ---------- */
-.article-header { padding-block: 3.5rem 1rem; }
+.article-header { padding-block: 3.5rem 0; }
 .article-header .meta {
   display: flex;
   gap: 0.9rem;
@@ -251,7 +253,7 @@ button:focus-visible {
   color: var(--spruce-70);
 }
 .article-header h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); max-width: 20ch; }
-.prose { padding-block: 1.5rem 4rem; }
+.prose { padding-block: 2.75rem 4rem; }
 .prose p { margin-block: 1.1rem; }
 .prose p:first-of-type {
   font-size: 1.2rem;
