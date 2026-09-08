@@ -102,3 +102,30 @@ collections:
           - { label: "Heading", name: "heading", widget: "string" }
           - { label: "Intro paragraph", name: "intro", widget: "text" }
           - { label: "Body", name: "body", widget: "markdown" }
+      - label: "Resources page"
+        name: "resources"
+        file: "src/content/pages/resources.md"
+        fields:
+          - { label: "Browser tab title", name: "title", widget: "string" }
+          - { label: "SEO description", name: "description", widget: "text", required: false }
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Intro paragraph", name: "intro", widget: "text", required: false }
+          - label: "Resource groups"
+            name: "groups"
+            widget: "list"
+            label_singular: "Group"
+            summary: "{{fields.heading}}"
+            hint: "Sections like 'Found an injured bird?'. Drag to reorder."
+            fields:
+              - { label: "Group heading", name: "heading", widget: "string" }
+              - { label: "Group intro", name: "intro", widget: "text", required: false }
+              - label: "Links"
+                name: "links"
+                widget: "list"
+                label_singular: "Link"
+                summary: "{{fields.name}}"
+                fields:
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "URL", name: "url", widget: "string", hint: "Full address starting with https://" }
+                  - { label: "Description", name: "desc", widget: "text", required: false }
+          - { label: "Fine print (legal note at bottom)", name: "finePrint", widget: "text", required: false }

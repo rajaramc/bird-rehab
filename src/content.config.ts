@@ -45,6 +45,23 @@ const pages = defineCollection({
     phone: z.string().optional(),
     phoneLink: z.string().optional(),
     legalNote: z.string().optional(),
+    // resources
+    finePrint: z.string().optional(),
+    groups: z
+      .array(
+        z.object({
+          heading: z.string(),
+          intro: z.string().optional(),
+          links: z.array(
+            z.object({
+              name: z.string(),
+              url: z.string(),
+              desc: z.string().optional(),
+            })
+          ),
+        })
+      )
+      .optional(),
   }),
 });
 
