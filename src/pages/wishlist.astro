@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+import { getEntry } from 'astro:content';
+
+const page = await getEntry('pages', 'wishlist');
+const { heading, intro, items = [] } = page.data;
+---
+<Base title={page.data.title} description={page.data.description}>
+  <section class="page-header">
+    <div class="wrap">
+      <p class="back"><a href="/donate">← Back to donate</a></p>
+      <h1>{heading}</h1>
+      {intro && <p>{intro}</p>}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      {items.length > 0 ? (
+        <ul class="wishlist-grid">
+          {items.map((item) => (
+            <li class="wish-card">
+              <h2>{item.name}</h2>
+              {item.note && <p>{item.note}</p>}
+              {item.url && item.url !== '#' && (
+                <a class="btn btn-outline" href={item.url} target="_blank" rel="noopener noreferrer">Send this →</a>
+              )}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="empty">The wishlist is being updated — check back soon, or reach out to ask what's needed.</p>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .back { margin-bottom: 1rem; }
+  .back a { font-weight: 700; font-size: 0.95rem; }
+  .wishlist-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 1.25rem;
+  }
+  .wish-card {
+    border: 1.5px solid var(--spruce-12);
+    border-radius: 16px;
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .wish-card h2 {
+    font-size: 1.2rem;
+    line-height: 1.2;
+  }
+  .wish-card p {
+    color: var(--spruce-70);
+    font-size: 0.98rem;
+    margin: 0;
+  }
+  .wish-card .btn {
+    margin-top: auto;
+    align-self: flex-start;
+    padding: 0.55rem 1.3rem;
+    font-size: 0.95rem;
+  }
+  .empty {
+    color: var(--spruce-70);
+    font-size: 1.1rem;
+  }
+</style>

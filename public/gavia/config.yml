@@ -129,3 +129,21 @@ collections:
                   - { label: "URL", name: "url", widget: "string", hint: "Full address starting with https://" }
                   - { label: "Description", name: "desc", widget: "text", required: false }
           - { label: "Fine print (legal note at bottom)", name: "finePrint", widget: "text", required: false }
+      - label: "Wishlist page"
+        name: "wishlist"
+        file: "src/content/pages/wishlist.md"
+        fields:
+          - { label: "Browser tab title", name: "title", widget: "string" }
+          - { label: "SEO description", name: "description", widget: "text", required: false }
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Intro paragraph", name: "intro", widget: "text", required: false }
+          - label: "Items"
+            name: "items"
+            widget: "list"
+            label_singular: "item"
+            summary: "{{fields.name}}"
+            hint: "Each item to request as a donation. Drag to reorder."
+            fields:
+              - { label: "Item name", name: "name", widget: "string" }
+              - { label: "Link (Amazon, Chewy, etc.)", name: "url", widget: "string", hint: "Full address starting with https://" }
+              - { label: "Note", name: "note", widget: "text", required: false, hint: "Optional — why it's needed" }

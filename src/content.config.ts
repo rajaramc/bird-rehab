@@ -40,6 +40,11 @@ const pages = defineCollection({
     qrImage: z.string().optional(),
     wishlistUrl: z.string().optional(),
     tiers: z.array(z.object({ amount: z.string(), covers: z.string() })).optional(),
+    items: z.array(z.object({
+      name: z.string(),
+      url: z.string(),
+      note: z.string().optional(),
+    })).optional(),
     // found-a-bird
     steps: z.array(z.object({ heading: z.string(), text: z.string() })).optional(),
     phone: z.string().optional(),
@@ -66,3 +71,5 @@ const pages = defineCollection({
 });
 
 export const collections = { posts, pages };
+
+
