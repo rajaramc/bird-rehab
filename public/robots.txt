@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /case/
+Disallow: /new-code.html
+Disallow: /gavia/
+
+Sitemap: https://secondflight.org/sitemap-index.xml

@@ -147,3 +147,16 @@ collections:
               - { label: "Item name", name: "name", widget: "string" }
               - { label: "Link (Amazon, Chewy, etc.)", name: "url", widget: "string", hint: "Full address starting with https://" }
               - { label: "Note", name: "note", widget: "text", required: false, hint: "Optional — why it's needed" }
+  # --- Case notes: per-finder instructions, reached only by /case/<code> ---
+  - name: "cases"
+    label: "Case notes"
+    label_singular: "Case note"
+    folder: "src/content/cases"
+    create: true
+    slug: "{{code}}"
+    summary: "{{title}}"
+    fields:
+      - { label: "Reference (private — your note to self)", name: "title", widget: "string", hint: "e.g. Robin — Edina. The finder does not see this." }
+      - { label: "Link code", name: "code", widget: "string", hint: "Paste a code from the code generator page. This becomes the secret /case/<code> link." }
+      - { label: "Expires on", name: "expires", widget: "datetime", required: false, hint: "Optional. After this date the link stops showing the content. Leave blank to never expire." }
+      - { label: "Instructions", name: "body", widget: "markdown", hint: "What this specific finder should do. Photos allowed." }

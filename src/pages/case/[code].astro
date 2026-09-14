@@ -1,0 +1,84 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const cases = await getCollection('cases');
+  return cases.map((c) => ({
+    params: { code: c.data.code },
+    props: { entry: c },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+// Expiry is evaluated at build time. A case with an `expires` date in the past
+// renders the "expired" message instead of the content (and re-evaluates on the
+// next site build).
+const now = new Date();
+const isExpired = entry.data.expires ? now > entry.data.expires : false;
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+---
+<Base title="Care instructions" description="">
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, nofollow" />
+  </Fragment>
+
+  <section class="case">
+    <div class="wrap content">
+      {isExpired ? (
+        <div class="expired">
+          <h1>This link has expired</h1>
+          <p>
+            These instructions were specific to one bird and are no longer
+            available. If you still need help, please
+            <a href="/found-a-bird">start here</a> or get in touch.
+          </p>
+        </div>
+      ) : (
+        <article class="prose">
+          <h1>{entry.data.title}</h1>
+          <p class="note">
+            These instructions are specific to your situation. When in doubt,
+            call before acting.
+          </p>
+          <Content />
+          {entry.data.expires && (
+            <p class="expiry-note">
+              This page will stop working after {fmt(entry.data.expires)}.
+            </p>
+          )}
+        </article>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .case { padding-block: 3.5rem 5rem; }
+  .prose h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; }
+  .note {
+    font-size: 1.1rem;
+    color: var(--spruce-70);
+    border-left: 3px solid var(--gold);
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+  }
+  .prose :global(p) { margin-block: 1.1rem; }
+  .prose :global(img) { max-width: 100%; border-radius: 12px; margin-block: 1.5rem; }
+  .prose :global(a) { color: var(--gold); font-weight: 700; }
+  .expiry-note {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--spruce-12);
+    font-size: 0.9rem;
+    color: var(--spruce-40);
+    font-style: italic;
+  }
+  .expired h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; }
+  .expired p { font-size: 1.15rem; color: var(--spruce-70); max-width: 48ch; }
+  .expired a { color: var(--gold); font-weight: 700; }
+</style>

@@ -21,7 +21,16 @@ const posts = defineCollection({
       .optional(),
   }),
 });
-
+//Cases and treament link on a per case basis that is unique to a treatment. This content is not visible to google or accessible from navs. Need direct links.
+const cases = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/cases' }),
+  schema: z.object({
+    title: z.string(),
+    code: z.string(),
+    expires: z.coerce.date().optional(),
+    body: z.string().optional(),
+  }),
+});
 // Editable standalone pages (donate, found-a-bird, about). Each file is a
 // singleton the rehabber edits via the CMS "Site pages" collection. The styled
 // layout lives in src/pages/*.astro; only the values below are editable, so the
@@ -70,6 +79,6 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { posts, pages };
+export const collections = { posts, pages, cases };
 
 
